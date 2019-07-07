@@ -1,0 +1,6 @@
+name: Bookshelves
+main: org.inventivetalent.bookshelves.Bookshelves
+author: inventivetalent
+version: ${project.version}
+
+softdepend: [GriefPrevention]

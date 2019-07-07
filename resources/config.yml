@@ -1,0 +1,11 @@
+inventory:
+  #Inventory size (must be a multiple of 9)
+  size: 18
+  #Inventory title
+  title: "Bookshelf"
+
+# Worlds to disable bookshelves in
+disabledWorlds: []
+
+# Whether to allow only books in shelves
+onlyBooks: true
