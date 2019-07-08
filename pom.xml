@@ -78,11 +78,17 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>org.mcstats.*</include>
+                                    <include>org.bstats:bstats-bukkit**</include>
                                     <include>org.inventivetalent:bookshelves**</include>
                                     <include>org.inventivetalent:itembuilder**</include>
                                 </includes>
                             </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>org.inventivetalent.bookshelves.bstats</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
@@ -105,18 +111,18 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.14.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.14.2-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.mcstats.bukkit</groupId>
-            <artifactId>metrics-lite</artifactId>
-            <version>R8-SNAPSHOT</version>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>org.inventivetalent</groupId>
@@ -151,17 +157,15 @@
             <url>http://repo.techcable.net/content/groups/public/</url>
         </repository>
         <repository>
-            <id>mcstats-repo</id>
-            <url>http://repo.mcstats.org/content/groups/public/</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>CodeMC</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
             <id>howaner-repo</id>
             <url>http://repo.howaner.de/</url>
         </repository>
     </repositories>
+
+
 
 </project>
