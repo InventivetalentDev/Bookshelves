@@ -88,7 +88,7 @@ public class ShelfListener implements Listener {
 
 		if (plugin.disabledWorlds.contains(player.getWorld().getName())) { return; }
 
-		if (clicked != null && plugin.INVENTORY_TITLE.equals(clicked.getTitle())) {
+		if (clicked != null && plugin.INVENTORY_TITLE.equals(event.getView().getTitle())) {
 			if (!player.hasPermission("bookshelf.modify")) { event.setCancelled(true); }
 			ItemStack item = event.getCursor();
 			if (item.getType() != Material.AIR && !plugin.isValidBook(item)) {
@@ -96,7 +96,7 @@ public class ShelfListener implements Listener {
 			}
 		}
 		if (event.getClick().isShiftClick()) {
-			if (inventory != null && plugin.INVENTORY_TITLE.equals(inventory.getTitle())) {
+			if (inventory != null && plugin.INVENTORY_TITLE.equals(event.getView().getTitle())) {
 				if (!player.hasPermission("bookshelf.modify")) { event.setCancelled(true); }
 				ItemStack item = event.getCurrentItem();
 				if (item.getType() != Material.AIR && !plugin.isValidBook(item)) {
