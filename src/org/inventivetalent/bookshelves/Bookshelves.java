@@ -1,6 +1,7 @@
 package org.inventivetalent.bookshelves;
 
 import com.google.gson.*;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -16,7 +17,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.inventivetalent.itembuilder.ItemBuilder;
-import org.mcstats.MetricsLite;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.*;
@@ -140,13 +140,7 @@ public class Bookshelves extends JavaPlugin {
 			}
 		}, 40);
 
-		try {
-			MetricsLite metrics = new MetricsLite(this);
-			if (metrics.start()) {
-				getLogger().info("Metrics started");
-			}
-		} catch (Exception e) {
-		}
+		new Metrics(this);
 	}
 
 	@Override
@@ -192,7 +186,7 @@ public class Bookshelves extends JavaPlugin {
 
 		if (itemStack == null) { return false; }
 		if (itemStack.getType() == Material.BOOK) { return true; }
-		if (itemStack.getType() == Material.BOOK_AND_QUILL) { return true; }
+		if (itemStack.getType() == Material.WRITABLE_BOOK) { return true; }
 		if (itemStack.getType() == Material.ENCHANTED_BOOK) { return true; }
 		if (itemStack.getType() == Material.WRITTEN_BOOK) { return true; }
 		return false;

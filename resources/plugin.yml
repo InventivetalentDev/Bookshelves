@@ -2,5 +2,6 @@ name: Bookshelves
 main: org.inventivetalent.bookshelves.Bookshelves
 author: inventivetalent
 version: ${project.version}
+api-version: 1.13
 
 softdepend: [GriefPrevention]
