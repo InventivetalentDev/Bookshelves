@@ -31,9 +31,18 @@ public class Bookshelves extends JavaPlugin {
 	String      INVENTORY_TITLE = "Bookshelf";
 	Set<String> disabledWorlds  = new HashSet<>();
 	boolean     onlyBooks       = true;
+	boolean 	worldGuardSupport = false;
 
 	Set<Location> shelves   = new HashSet<>();
 	File          shelfFile = new File(getDataFolder(), "shelves.json");
+
+	@Override
+	public void onLoad() {
+		worldGuardSupport = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
+		if (worldGuardSupport) {
+			WorldGuardUtils.registerBookshelfAccessFlag();
+		}
+	}
 
 	@Override
 	public void onEnable() {
@@ -83,6 +92,10 @@ public class Bookshelves extends JavaPlugin {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+
+		if (worldGuardSupport) {
+			getLogger().info("Found WorldGuard plugin");
 		}
 
 		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
