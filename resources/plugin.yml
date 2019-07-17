@@ -4,4 +4,4 @@ author: inventivetalent
 version: ${project.version}
 api-version: 1.13
 
-softdepend: [GriefPrevention]
+softdepend: [GriefPrevention, WorldGuard]
