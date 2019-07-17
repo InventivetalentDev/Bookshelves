@@ -79,7 +79,6 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.bstats:bstats-bukkit**</include>
-                                    <include>org.inventivetalent:bookshelves**</include>
                                     <include>org.inventivetalent:itembuilder**</include>
                                 </includes>
                             </artifactSet>
@@ -124,6 +123,12 @@
             <artifactId>itembuilder</artifactId>
             <version>[1.0.10,)</version>
         </dependency>
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -145,7 +150,7 @@
         </repository>
         <repository>
             <id>sk89q-repo</id>
-            <url>http://maven.sk89q.com/artifactory/repo/</url>
+            <url>https://maven.sk89q.com/repo/</url>
         </repository>
         <repository>
             <id>techcable-repo</id>
