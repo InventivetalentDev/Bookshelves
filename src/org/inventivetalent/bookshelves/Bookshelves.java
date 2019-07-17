@@ -40,6 +40,7 @@ public class Bookshelves extends JavaPlugin {
 	public void onLoad() {
 		worldGuardSupport = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
 		if (worldGuardSupport) {
+			getLogger().info("Found WorldGuard plugin");
 			WorldGuardUtils.registerBookshelfAccessFlag();
 		}
 	}
@@ -92,10 +93,6 @@ public class Bookshelves extends JavaPlugin {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-
-		if (worldGuardSupport) {
-			getLogger().info("Found WorldGuard plugin");
 		}
 
 		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
