@@ -37,6 +37,7 @@ public class ShelfListener implements Listener {
 
 		if (!player.hasPermission("bookshelf.open")) { return; }
 		if (player.isSneaking()) { return; }
+		if (plugin.worldGuardSupport && !WorldGuardUtils.isAllowedToAccess(player, block)) { return; }
 
 		Inventory inventory = plugin.getShelf(block);
 		if (inventory == null) { inventory = plugin.initShelf(block); }
