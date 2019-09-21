@@ -17,7 +17,7 @@ restrictions:
   # When true restrictions will be enabled
   enabled: false
 
-  # When true the item-list will be used as whitelist
+  # When true the material-list will be used as whitelist
   whitelist: true
 
   # Define the restricted/whitelisted materials below
