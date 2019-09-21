@@ -32,6 +32,8 @@ public class Bookshelves extends JavaPlugin {
 	Set<String> disabledWorlds  = new HashSet<>();
 	boolean     onlyBooks       = true;
 	boolean     worldGuardSupport = false;
+	boolean checkRestrictions = false;
+	RestrictionManager restrictionManager = null;
 
 	Set<Location> shelves   = new HashSet<>();
 	File          shelfFile = new File(getDataFolder(), "shelves.json");
@@ -50,6 +52,7 @@ public class Bookshelves extends JavaPlugin {
 		instance = this;
 		Bukkit.getPluginManager().registerEvents(new ShelfListener(this), this);
 
+		// Save configuration & load values
 		saveDefaultConfig();
 		INVENTORY_SIZE = getConfig().getInt("inventory.size");
 		if (INVENTORY_SIZE % 9 != 0) {
@@ -59,7 +62,14 @@ public class Bookshelves extends JavaPlugin {
 		INVENTORY_TITLE = ChatColor.translateAlternateColorCodes('&', getConfig().getString("inventory.title")) +/* Unique title */"§B§S";
 		if (getConfig().contains("disabledWorlds")) { disabledWorlds.addAll(getConfig().getStringList("disabledWorlds")); }
 		onlyBooks = getConfig().getBoolean("onlyBooks", true);
+		checkRestrictions = getConfig().getBoolean("restrictions.enabled");
 
+		// Initialize restrictions
+		if (checkRestrictions) {
+			restrictionManager = new RestrictionManager();
+		}
+
+		// GriefPrevention compatibility
 		if (Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
 			getLogger().info("Found GriefPrevention plugin");
 			try {
@@ -87,6 +97,7 @@ public class Bookshelves extends JavaPlugin {
 			}
 		}
 
+		// ShelfFile creation
 		if (!shelfFile.exists()) {
 			try {
 				shelfFile.createNewFile();
@@ -95,6 +106,7 @@ public class Bookshelves extends JavaPlugin {
 			}
 		}
 
+		// Schedule bookshelf loading
 		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
 			@Override
 			public void run() {
@@ -192,7 +204,8 @@ public class Bookshelves extends JavaPlugin {
 	}
 
 	boolean isValidBook(ItemStack itemStack) {
-		if (!onlyBooks) { return true; }
+		if (!onlyBooks && !checkRestrictions) { return true; }
+		if (!onlyBooks && checkRestrictions) { return restrictionManager.isRestricted(itemStack.getType()); }
 
 		if (itemStack == null) { return false; }
 		if (itemStack.getType() == Material.BOOK) { return true; }

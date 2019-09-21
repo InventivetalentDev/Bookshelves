@@ -9,3 +9,20 @@ disabledWorlds: []
 
 # Whether to allow only books in shelves
 onlyBooks: true
+
+# Material-restrictions
+# IMPORTANT: Restrictions only work when onlyBooks is set to false
+restrictions:
+
+  # When true restrictions will be enabled
+  enabled: false
+
+  # When true the item-list will be used as whitelist
+  whitelist: true
+
+  # Define the restricted/whitelisted materials below
+  materials:
+    - BOOK
+    - WRITABLE_BOOK
+    - WRITTEN_BOOK
+    - ENCHANTED_BOOK
