@@ -204,8 +204,7 @@ public class Bookshelves extends JavaPlugin {
 	}
 
 	boolean isValidBook(ItemStack itemStack) {
-		if (!onlyBooks && !checkRestrictions) { return true; }
-		if (!onlyBooks && checkRestrictions) { return restrictionManager.isRestricted(itemStack.getType()); }
+		if (!onlyBooks) { return checkRestrictions ? restrictionManager.isRestricted(itemStack.getType()) : true; }
 
 		if (itemStack == null) { return false; }
 		if (itemStack.getType() == Material.BOOK) { return true; }
