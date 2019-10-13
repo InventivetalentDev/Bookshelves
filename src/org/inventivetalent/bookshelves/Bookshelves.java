@@ -215,12 +215,19 @@ public class Bookshelves extends JavaPlugin {
 	}
 
 	public Inventory initShelf(Block block) {
+		Inventory inventory;
 		if (!block.hasMetadata("BOOKSHELF_INVENTORY")) {
-			Inventory inventory = Bukkit.createInventory(null, INVENTORY_SIZE, INVENTORY_TITLE);
+			inventory = Bukkit.createInventory(null, INVENTORY_SIZE, INVENTORY_TITLE);
 			MetaHelper.setMetaValue(block, "BOOKSHELF_INVENTORY", inventory);
 
 			shelves.add(block.getLocation());
 			return inventory;
+		} else {
+			inventory = getShelf(block);
+			if (inventory != null) {
+				shelves.add(block.getLocation());
+				return inventory;
+			}
 		}
 		return null;
 	}
