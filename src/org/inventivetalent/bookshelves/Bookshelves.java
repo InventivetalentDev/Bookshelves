@@ -22,6 +22,7 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Bookshelves extends JavaPlugin {
 
@@ -87,9 +88,9 @@ public class Bookshelves extends JavaPlugin {
 					getLogger().warning("Could not find PlayerEventHandler for GriefPrevention");
 				} else {
 					Field inventoryHolderCacheField = AccessUtil.setAccessible(PlayerEventHandler.getDeclaredField("inventoryHolderCache"));
-					Map<Integer, Boolean> inventoryHolderCache = (Map<Integer, Boolean>) inventoryHolderCacheField.get(playerEventHandlerInstance);
+					ConcurrentHashMap<Material, Boolean> inventoryHolderCache = (ConcurrentHashMap<Material, Boolean>) inventoryHolderCacheField.get(playerEventHandlerInstance);
 
-					inventoryHolderCache.put(Material.BOOKSHELF.getId(), true);
+					inventoryHolderCache.put(Material.BOOKSHELF, true);
 					getLogger().info("Injected Bookshelf as container type into GriefPrevention");
 				}
 			} catch (Exception e) {
