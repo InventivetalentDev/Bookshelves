@@ -156,6 +156,8 @@ public class Bookshelves extends JavaPlugin {
 							}
 						}
 					}
+
+					if (getConfig().getBoolean("hoppers")) HopperUtils.initializeHopperSupport();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
