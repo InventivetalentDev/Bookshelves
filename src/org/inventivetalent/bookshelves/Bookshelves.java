@@ -65,7 +65,7 @@ public class Bookshelves extends JavaPlugin {
 		if (getConfig().contains("disabledWorlds")) { disabledWorlds.addAll(getConfig().getStringList("disabledWorlds")); }
 		onlyBooks = getConfig().getBoolean("onlyBooks", true);
 		checkRestrictions = getConfig().getBoolean("restrictions.enabled");
-		hopperSupport = getConfig().getBoolean("onlyBooks");
+		hopperSupport = getConfig().getBoolean("hoppers");
 
 		// Initialize restrictions
 		if (checkRestrictions) {
