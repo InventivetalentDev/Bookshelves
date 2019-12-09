@@ -19,9 +19,12 @@ public class HopperUtils {
         List<Hopper> hoppers = getHoppers(block, BlockFace.UP, BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
         int seconds = 1;
 
+        if (shelf == null) return;
+
         if (shelf.firstEmpty() > -1) {
             for (Hopper hopper : hoppers) {
                 for (ItemStack itemStack : hopper.getInventory().getContents()) {
+                    if (!Bookshelves.instance.isValidBook(itemStack)) continue;
                     new ScheduledItemTransfer(hopper.getInventory(), shelf, itemStack, seconds);
                     seconds++;
                 }
@@ -39,7 +42,10 @@ public class HopperUtils {
             Hopper hopper = hoppers.get(0);
             Inventory shelf = Bookshelves.instance.getShelf(block);
 
+            if (shelf == null) return;
+
             for (ItemStack itemStack : shelf) {
+                if (!Bookshelves.instance.isValidBook(itemStack)) continue;
                 new ScheduledItemTransfer(shelf, hopper.getInventory(), itemStack, seconds);
                 seconds++;
             }

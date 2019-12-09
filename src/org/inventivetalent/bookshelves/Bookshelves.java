@@ -33,7 +33,8 @@ public class Bookshelves extends JavaPlugin {
 	Set<String> disabledWorlds  = new HashSet<>();
 	boolean     onlyBooks       = true;
 	boolean     worldGuardSupport = false;
-	boolean checkRestrictions = false;
+	boolean 	checkRestrictions = false;
+	boolean		hopperSupport = false;
 	RestrictionManager restrictionManager = null;
 
 	Set<Location> shelves   = new HashSet<>();
@@ -64,6 +65,7 @@ public class Bookshelves extends JavaPlugin {
 		if (getConfig().contains("disabledWorlds")) { disabledWorlds.addAll(getConfig().getStringList("disabledWorlds")); }
 		onlyBooks = getConfig().getBoolean("onlyBooks", true);
 		checkRestrictions = getConfig().getBoolean("restrictions.enabled");
+		hopperSupport = getConfig().getBoolean("onlyBooks");
 
 		// Initialize restrictions
 		if (checkRestrictions) {
@@ -157,7 +159,7 @@ public class Bookshelves extends JavaPlugin {
 						}
 					}
 
-					if (getConfig().getBoolean("hoppers")) HopperUtils.initializeHopperSupport();
+					if (hopperSupport) HopperUtils.initializeHopperSupport();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -224,6 +226,8 @@ public class Bookshelves extends JavaPlugin {
 			MetaHelper.setMetaValue(block, "BOOKSHELF_INVENTORY", inventory);
 
 			shelves.add(block.getLocation());
+			if (hopperSupport) HopperUtils.pull(block);
+
 			return inventory;
 		} else {
 			inventory = getShelf(block);
